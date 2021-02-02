@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Data.Base;
 
 namespace Data.Entities
 {
-    [Table(name: "WareHouses", Schema = "wrhs")]
-    public class WareHouse : BaseEntity
+    [Table(name: "Colors", Schema = "clrs")]
+    public class Color : BaseEntity
     {
-        public int Number { get; set; }
-        public int Code { get; set; }
-        public string Report { get; set; }
         public string Name { get; set; }
-        public string Adress { get; set; }
     }
 }
