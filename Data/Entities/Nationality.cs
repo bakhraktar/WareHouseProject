@@ -12,6 +12,7 @@ namespace Data.Entities
     [Table(name: "Nationalities", Schema = "brnd")]
     public class Nationality : BaseEntity
     {
+        [Required]
         public string Name { get; set; }
     }
 }

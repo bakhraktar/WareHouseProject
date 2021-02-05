@@ -10,7 +10,7 @@ namespace Data.Entities
     [Table(name: "Products", Schema = "prdc")]
     public class Product : BaseEntity
     {
-        public int InitialCode { get; set; }
+        public AccountentTree AccountentTreeCode { get; set; }
         public string Report { get; set; }
         public string Barcode { get; set; }
         public string BoxCode { get; set; }

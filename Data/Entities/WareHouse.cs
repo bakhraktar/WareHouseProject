@@ -11,7 +11,7 @@ namespace Data.Entities
     public class WareHouse : BaseEntity
     {
         public int Number { get; set; }
-        public int Code { get; set; }
+        public AccountentTree AccountentTreeCode { get; set; }
         public string Report { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }

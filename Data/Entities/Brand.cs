@@ -12,6 +12,8 @@ namespace Data.Entities
     [Table(name : "Brands", Schema = "brnd")]
     public class Brand : BaseEntity
     {
+        [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
     }
 }

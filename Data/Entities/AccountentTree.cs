@@ -9,10 +9,12 @@ using Data.Base;
 
 namespace Data.Entities
 {
-    [Table(name: "OrganizationTypes", Schema = "orgt")]
-    public class OrganizationType : BaseEntity
+    [Table(name: "AccountentTrees", Schema = "acnt")]
+    public class AccountentTree : BaseEntity
     {
-        [Required]
+        public string Code { get; set; }
+        public string FullCode { get; set; }
         public string Name { get; set; }
+        public AccountentTree ParentTree { get; set; }
     }
 }

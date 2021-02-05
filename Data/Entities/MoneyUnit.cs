@@ -12,6 +12,9 @@ namespace Data.Entities
     [Table(name: "Manufacturers", Schema = "mnun")]
     public class MoneyUnit : BaseEntity
     {
+        [Required]
         public string Name { get; set; }
+        [Required]
+        public string MyProperty { get; set; }
     }
 }

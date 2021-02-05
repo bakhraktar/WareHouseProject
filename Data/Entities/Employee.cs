@@ -12,7 +12,7 @@ namespace Data.Entities
     [Table(name: "Employees", Schema = "empl")]
     public class Employee : BaseEntity
     {
-        public int Code { get; set; }
+        public AccountentTree AccountentTreeCode { get; set; }
         public string PersonalNumber { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }

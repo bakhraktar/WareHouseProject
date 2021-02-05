@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210202030457_AddedNames")]
-    partial class AddedNames
+    [Migration("20210205005055_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,32 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("Data.Entities.AccountentTree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentTreeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentTreeId");
+
+                    b.ToTable("AccountentTrees", "acnt");
+                });
+
             modelBuilder.Entity("Data.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -29,7 +55,9 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -44,11 +72,38 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Colors", "clrs");
+                });
+
+            modelBuilder.Entity("Data.Entities.Currency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Course")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FirstMoneyUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SecondMoneyUnitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirstMoneyUnitId");
+
+                    b.HasIndex("SecondMoneyUnitId");
+
+                    b.ToTable("Currencies", "crcy");
                 });
 
             modelBuilder.Entity("Data.Entities.Employee", b =>
@@ -58,11 +113,11 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("AccountentTreeCodeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
 
                     b.Property<string>("EmailAdress")
                         .HasColumnType("nvarchar(max)");
@@ -90,6 +145,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountentTreeCodeId");
+
                     b.HasIndex("GenderId");
 
                     b.HasIndex("JobPositionId");
@@ -107,6 +164,7 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -121,7 +179,8 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Position")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -137,6 +196,7 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -151,7 +211,12 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("MyProperty")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -167,11 +232,80 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Nationalities", "brnd");
+                });
+
+            modelBuilder.Entity("Data.Entities.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("AccountentTreeCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GPSAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OrganizationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebSite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountentTreeCodeId");
+
+                    b.HasIndex("OrganizationTypeId");
+
+                    b.ToTable("Organizations", "orgn");
+                });
+
+            modelBuilder.Entity("Data.Entities.OrganizationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrganizationTypes", "orgt");
                 });
 
             modelBuilder.Entity("Data.Entities.Origin", b =>
@@ -182,6 +316,7 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -195,6 +330,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<int?>("AccountentTreeCodeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Barcode")
                         .HasColumnType("nvarchar(max)");
@@ -210,9 +348,6 @@ namespace Data.Migrations
 
                     b.Property<string>("EnglishName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("InitialCode")
-                        .HasColumnType("int");
 
                     b.Property<int?>("ManufacturerId")
                         .HasColumnType("int");
@@ -246,6 +381,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountentTreeCodeId");
+
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ColorId");
@@ -271,6 +408,7 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -286,6 +424,7 @@ namespace Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -300,11 +439,11 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("AccountentTreeCodeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -317,11 +456,41 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountentTreeCodeId");
+
                     b.ToTable("WareHouses", "wrhs");
+                });
+
+            modelBuilder.Entity("Data.Entities.AccountentTree", b =>
+                {
+                    b.HasOne("Data.Entities.AccountentTree", "ParentTree")
+                        .WithMany()
+                        .HasForeignKey("ParentTreeId");
+
+                    b.Navigation("ParentTree");
+                });
+
+            modelBuilder.Entity("Data.Entities.Currency", b =>
+                {
+                    b.HasOne("Data.Entities.MoneyUnit", "FirstMoneyUnit")
+                        .WithMany()
+                        .HasForeignKey("FirstMoneyUnitId");
+
+                    b.HasOne("Data.Entities.MoneyUnit", "SecondMoneyUnit")
+                        .WithMany()
+                        .HasForeignKey("SecondMoneyUnitId");
+
+                    b.Navigation("FirstMoneyUnit");
+
+                    b.Navigation("SecondMoneyUnit");
                 });
 
             modelBuilder.Entity("Data.Entities.Employee", b =>
                 {
+                    b.HasOne("Data.Entities.AccountentTree", "AccountentTreeCode")
+                        .WithMany()
+                        .HasForeignKey("AccountentTreeCodeId");
+
                     b.HasOne("Data.Entities.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");
@@ -334,6 +503,8 @@ namespace Data.Migrations
                         .WithMany()
                         .HasForeignKey("NationalityId");
 
+                    b.Navigation("AccountentTreeCode");
+
                     b.Navigation("Gender");
 
                     b.Navigation("JobPosition");
@@ -341,8 +512,27 @@ namespace Data.Migrations
                     b.Navigation("Nationality");
                 });
 
+            modelBuilder.Entity("Data.Entities.Organization", b =>
+                {
+                    b.HasOne("Data.Entities.AccountentTree", "AccountentTreeCode")
+                        .WithMany()
+                        .HasForeignKey("AccountentTreeCodeId");
+
+                    b.HasOne("Data.Entities.OrganizationType", "OrganizationType")
+                        .WithMany()
+                        .HasForeignKey("OrganizationTypeId");
+
+                    b.Navigation("AccountentTreeCode");
+
+                    b.Navigation("OrganizationType");
+                });
+
             modelBuilder.Entity("Data.Entities.Product", b =>
                 {
+                    b.HasOne("Data.Entities.AccountentTree", "AccountentTreeCode")
+                        .WithMany()
+                        .HasForeignKey("AccountentTreeCodeId");
+
                     b.HasOne("Data.Entities.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId");
@@ -371,6 +561,8 @@ namespace Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProductCategoryId");
 
+                    b.Navigation("AccountentTreeCode");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Color");
@@ -384,6 +576,15 @@ namespace Data.Migrations
                     b.Navigation("ProcutType");
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("Data.Entities.WareHouse", b =>
+                {
+                    b.HasOne("Data.Entities.AccountentTree", "AccountentTreeCode")
+                        .WithMany()
+                        .HasForeignKey("AccountentTreeCodeId");
+
+                    b.Navigation("AccountentTreeCode");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,7 @@ namespace Data.Entities
     [Table(name: "JobPositions", Schema = "jbps")]
     public class JobPosition : BaseEntity
     {
-        public string Position { get; set; }
+        [Required]
+        public string Name { get; set; }
     }
 }

@@ -12,6 +12,8 @@ namespace Data.Entities
     [Table(name: "Colors", Schema = "clrs")]
     public class Color : BaseEntity
     {
+        [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
     }
 }

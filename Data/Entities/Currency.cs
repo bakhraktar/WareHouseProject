@@ -13,7 +13,7 @@ namespace Data.Entities
     public class Currency : BaseEntity
     {
         public MoneyUnit FirstMoneyUnit { get; set; }
-        public MoneyUnit SecondMoneyUnit { get; set; }
         public int Course { get; set; }
+        public MoneyUnit SecondMoneyUnit { get; set; }
     }
 }
