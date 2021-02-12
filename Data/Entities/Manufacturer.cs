@@ -13,6 +13,7 @@ namespace Data.Entities
     public class Manufacturer : BaseEntity
     {
         [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
     }
 }

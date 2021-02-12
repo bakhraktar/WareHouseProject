@@ -30,6 +30,8 @@ namespace Data.Access
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AccountentTree>().HasIndex(x => x.Code).IsUnique();
+            modelBuilder.Entity<AccountentTree>().HasIndex(x => x.FullCode).IsUnique();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

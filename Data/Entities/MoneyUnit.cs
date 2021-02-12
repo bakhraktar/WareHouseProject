@@ -9,12 +9,14 @@ using Data.Base;
 
 namespace Data.Entities
 {
-    [Table(name: "Manufacturers", Schema = "mnun")]
+    [Table(name: "MoneyUnits", Schema = "mnun")]
     public class MoneyUnit : BaseEntity
     {
         [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
         [Required]
-        public string MyProperty { get; set; }
+        [MaxLength(40)]
+        public string Unit { get; set; }
     }
 }

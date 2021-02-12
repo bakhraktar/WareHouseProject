@@ -7,11 +7,11 @@ using Data.Access;
 using Data.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repository.Base
+namespace Repository.BaseRepositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly DataContext _Context;
+        protected readonly DataContext _Context;
         private DbSet<T> _Entities;
         public BaseRepository(DataContext Context)
         {
@@ -33,20 +33,15 @@ namespace Repository.Base
                 return _Entities;
         }
 
-        public T GetById(int toGetId)
+        public T GetById(int toGet)
         {
-            if (toGetId <= 0)
+            if (toGet <= 0)
                 throw new ArgumentOutOfRangeException();
             else
-                return _Entities.SingleOrDefault(x => x.Id == toGetId);
+                return _Entities.SingleOrDefault(x => x.Id == toGet);
         }
 
-        public T GetById()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(T? toInsert)
+        public void Insert(T toInsert)
         {
             if (toInsert == null)
                 throw new ArgumentNullException();
@@ -55,13 +50,11 @@ namespace Repository.Base
             _Context.SaveChanges();
         }
 
-        public void Update(T toUpdate)
+        public void Update(T toUpdate, int IdToUpdate)
         {
-            throw new NotImplementedException();
-        }
-        public bool SaveChanges()
-        {
-            throw new NotImplementedException();
+            T tmp = _Entities.SingleOrDefault(x => x.Id == IdToUpdate);
+            _Context.Entry(tmp).CurrentValues.SetValues(toUpdate);
+            _Context.SaveChanges();
         }
     }
 }

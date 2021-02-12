@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Data.Base;
 
-namespace Repository.Base
+namespace Repository.BaseRepositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll();
-        T GetById();
+        T GetById(int toGetId);
         void Insert(T toInsert);
         void Delete(int toDelete);
-        void Update(T toUpdate);
-        bool SaveChanges();
+        void Update(T toUpdate, int IdToUpdate);
     }
 }

@@ -12,8 +12,13 @@ namespace Data.Entities
     {
         public int Number { get; set; }
         public AccountentTree AccountentTreeCode { get; set; }
+        [MaxLength(40)]
         public string Report { get; set; }
+        [MaxLength(40)]
         public string Name { get; set; }
-        public string Adress { get; set; }
+        [MaxLength(40)]
+        public string Address { get; set; }
+        [MaxLength(40)]
+        public Employee Manager { get; set; }
     }
 }

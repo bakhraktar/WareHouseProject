@@ -13,13 +13,19 @@ namespace Data.Entities
     public class Employee : BaseEntity
     {
         public AccountentTree AccountentTreeCode { get; set; }
+        [MaxLength(40)]
         public string PersonalNumber { get; set; }
+        [MaxLength(40)]
         public string Firstname { get; set; }
+        [MaxLength(40)]
         public string Lastname { get; set; }
         public Gender Gender { get; set; }
         public Nationality Nationality { get; set; }
+        [MaxLength(100)]
         public string Address { get; set; }
+        [MaxLength(40)]
         public string PhoneNumber { get; set; }
+        [MaxLength(40)]
         public string EmailAdress { get; set; }
         public JobPosition JobPosition { get; set; }
     }
