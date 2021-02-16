@@ -13,10 +13,8 @@ namespace Data.Entities
     public class MoneyUnit : BaseEntity
     {
         [Required]
-        [MaxLength(40)]
         public string Name { get; set; }
         [Required]
-        [MaxLength(40)]
         public string Unit { get; set; }
     }
 }

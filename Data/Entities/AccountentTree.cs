@@ -12,15 +12,10 @@ namespace Data.Entities
     [Table(name: "AccountentTrees", Schema = "acnt")]
     public class AccountentTree : BaseEntity
     {
-        [Required]
-        [MaxLength(40)]
         public string Code { get; set; }
-        [Required]
-        [MaxLength(40)]
         public string FullCode { get; set; }
-        [Required]
-        [MaxLength(40)]
         public string Name { get; set; }
-        public AccountentTree ParentTree { get; set; }
+        public int? ParentId { get; set; }
+        public virtual IEnumerable<AccountentTree> ChildrenTree { get; set; }
     }
 }

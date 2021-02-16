@@ -4,14 +4,16 @@ using Data.Access;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210216023408_AddedService")]
+    partial class AddedService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +39,6 @@ namespace Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -484,7 +483,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.AccountentTree", b =>
                 {
                     b.HasOne("Data.Entities.AccountentTree", null)
-                        .WithMany("ChildrenTree")
+                        .WithMany("ParentTree")
                         .HasForeignKey("AccountentTreeId");
                 });
 
@@ -607,7 +606,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.AccountentTree", b =>
                 {
-                    b.Navigation("ChildrenTree");
+                    b.Navigation("ParentTree");
                 });
 #pragma warning restore 612, 618
         }

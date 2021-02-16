@@ -13,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Data.Access;
 using Microsoft.EntityFrameworkCore;
-
+using Repository.BaseRepositories;
 namespace Warehouse
 {
     public class Startup
@@ -35,6 +35,7 @@ namespace Warehouse
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Warehouse", Version = "v1" });
             });
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("WareHouseDB")));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
