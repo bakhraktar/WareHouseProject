@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Data.Access;
 using Microsoft.EntityFrameworkCore;
 using Repository.BaseRepositories;
+using Service.AccountentTrees;
 namespace Warehouse
 {
     public class Startup
@@ -36,6 +37,7 @@ namespace Warehouse
             });
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("WareHouseDB")));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(AccountentTreeService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,8 +58,7 @@ namespace Warehouse
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-            });
+                endpoints.MapControllers();            });
         }
     }
 }

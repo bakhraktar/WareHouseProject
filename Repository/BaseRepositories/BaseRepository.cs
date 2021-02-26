@@ -27,10 +27,7 @@ namespace Repository.BaseRepositories
 
         public IEnumerable<T> GetAll()
         {
-            if (_Entities.Count() == 0)
-                throw new NullReferenceException();
-            else
-                return _Entities;
+             return _Entities;
         }
 
         public T GetById(int toGet)

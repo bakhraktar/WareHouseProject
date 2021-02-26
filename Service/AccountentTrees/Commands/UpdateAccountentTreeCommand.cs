@@ -7,19 +7,18 @@ using FluentValidation;
 
 namespace Service.AccountentTrees.Commands
 {
-    public class CreateAccountentTreeCommand
+    public class UpdateAccountentTreeCommand
     {
+        public int Id { get; set; }
         public string Code { get; set; }
-        public string Name { get; set; }
         public int? ParentId { get; set; }
-        public string FullCode;
+        public string Name { get; set; }
     }
-    public class CreateAccountTreeCommandValidator : AbstractValidator<CreateAccountentTreeCommand>
+    public class UpdateAccountentTreeCommandValidator : AbstractValidator<UpdateAccountentTreeCommand>
     {
-        public CreateAccountTreeCommandValidator()
+        public UpdateAccountentTreeCommandValidator()
         {
 
         }
     }
-
 }

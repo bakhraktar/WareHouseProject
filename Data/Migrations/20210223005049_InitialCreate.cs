@@ -58,17 +58,18 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FullCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FullCode = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentTreeId = table.Column<int>(type: "int", nullable: true)
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    AccountentTreeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AccountentTrees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccountentTrees_AccountentTrees_ParentTreeId",
-                        column: x => x.ParentTreeId,
+                        name: "FK_AccountentTrees_AccountentTrees_AccountentTreeId",
+                        column: x => x.AccountentTreeId,
                         principalSchema: "acnt",
                         principalTable: "AccountentTrees",
                         principalColumn: "Id",
@@ -110,7 +111,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,7 +125,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,7 +139,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,18 +147,18 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manufacturers",
+                name: "MoneyUnits",
                 schema: "mnun",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MyProperty = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
+                    table.PrimaryKey("PK_MoneyUnits", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,7 +168,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,7 +182,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,7 +196,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -209,7 +210,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,7 +224,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -231,23 +232,30 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WareHouses",
-                schema: "wrhs",
+                name: "Organizations",
+                schema: "orgn",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: false),
                     AccountentTreeCodeId = table.Column<int>(type: "int", nullable: true),
-                    Report = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    EnglishName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GPSAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WebSite = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrganizationTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WareHouses", x => x.Id);
+                    table.PrimaryKey("PK_Organizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WareHouses_AccountentTrees_AccountentTreeCodeId",
+                        name: "FK_Organizations_AccountentTrees_AccountentTreeCodeId",
                         column: x => x.AccountentTreeCodeId,
                         principalSchema: "acnt",
                         principalTable: "AccountentTrees",
@@ -270,17 +278,17 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_Currencies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Currencies_Manufacturers_FirstMoneyUnitId",
+                        name: "FK_Currencies_MoneyUnits_FirstMoneyUnitId",
                         column: x => x.FirstMoneyUnitId,
                         principalSchema: "mnun",
-                        principalTable: "Manufacturers",
+                        principalTable: "MoneyUnits",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Currencies_Manufacturers_SecondMoneyUnitId",
+                        name: "FK_Currencies_MoneyUnits_SecondMoneyUnitId",
                         column: x => x.SecondMoneyUnitId,
                         principalSchema: "mnun",
-                        principalTable: "Manufacturers",
+                        principalTable: "MoneyUnits",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -337,53 +345,14 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Organizations",
-                schema: "orgn",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AccountentTreeCodeId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnglishName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GPSAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WebSite = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrganizationTypeId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Organizations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Organizations_AccountentTrees_AccountentTreeCodeId",
-                        column: x => x.AccountentTreeCodeId,
-                        principalSchema: "acnt",
-                        principalTable: "AccountentTrees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Organizations_OrganizationTypes_OrganizationTypeId",
-                        column: x => x.OrganizationTypeId,
-                        principalSchema: "orgt",
-                        principalTable: "OrganizationTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 schema: "prdc",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    InitialCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccountentTreeCodeId = table.Column<int>(type: "int", nullable: true),
-                    Report = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BoxCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -395,7 +364,7 @@ namespace Data.Migrations
                     OriginId = table.Column<int>(type: "int", nullable: true),
                     ManufacturerId = table.Column<int>(type: "int", nullable: true),
                     BrandId = table.Column<int>(type: "int", nullable: true),
-                    Proto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SelfCost = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false)
                 },
@@ -431,10 +400,10 @@ namespace Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Products_Manufacturers_MoneyUnitId",
+                        name: "FK_Products_MoneyUnits_MoneyUnitId",
                         column: x => x.MoneyUnitId,
                         principalSchema: "mnun",
-                        principalTable: "Manufacturers",
+                        principalTable: "MoneyUnits",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -460,11 +429,60 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "WareHouses",
+                schema: "wrhs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    AccountentTreeCodeId = table.Column<int>(type: "int", nullable: true),
+                    Report = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManagerId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WareHouses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WareHouses_AccountentTrees_AccountentTreeCodeId",
+                        column: x => x.AccountentTreeCodeId,
+                        principalSchema: "acnt",
+                        principalTable: "AccountentTrees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WareHouses_Employees_ManagerId",
+                        column: x => x.ManagerId,
+                        principalSchema: "empl",
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_AccountentTrees_ParentTreeId",
+                name: "IX_AccountentTrees_AccountentTreeId",
                 schema: "acnt",
                 table: "AccountentTrees",
-                column: "ParentTreeId");
+                column: "AccountentTreeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountentTrees_Code",
+                schema: "acnt",
+                table: "AccountentTrees",
+                column: "Code",
+                unique: true,
+                filter: "[Code] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountentTrees_FullCode",
+                schema: "acnt",
+                table: "AccountentTrees",
+                column: "FullCode",
+                unique: true,
+                filter: "[FullCode] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Currencies_FirstMoneyUnitId",
@@ -507,12 +525,6 @@ namespace Data.Migrations
                 schema: "orgn",
                 table: "Organizations",
                 column: "AccountentTreeCodeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Organizations_OrganizationTypeId",
-                schema: "orgn",
-                table: "Organizations",
-                column: "OrganizationTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_AccountentTreeCodeId",
@@ -567,6 +579,12 @@ namespace Data.Migrations
                 schema: "wrhs",
                 table: "WareHouses",
                 column: "AccountentTreeCodeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WareHouses_ManagerId",
+                schema: "wrhs",
+                table: "WareHouses",
+                column: "ManagerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -576,12 +594,12 @@ namespace Data.Migrations
                 schema: "crcy");
 
             migrationBuilder.DropTable(
-                name: "Employees",
-                schema: "empl");
-
-            migrationBuilder.DropTable(
                 name: "Organizations",
                 schema: "orgn");
+
+            migrationBuilder.DropTable(
+                name: "OrganizationTypes",
+                schema: "orgt");
 
             migrationBuilder.DropTable(
                 name: "Products",
@@ -590,22 +608,6 @@ namespace Data.Migrations
             migrationBuilder.DropTable(
                 name: "WareHouses",
                 schema: "wrhs");
-
-            migrationBuilder.DropTable(
-                name: "Genders",
-                schema: "gndr");
-
-            migrationBuilder.DropTable(
-                name: "JobPositions",
-                schema: "jbps");
-
-            migrationBuilder.DropTable(
-                name: "Nationalities",
-                schema: "brnd");
-
-            migrationBuilder.DropTable(
-                name: "OrganizationTypes",
-                schema: "orgt");
 
             migrationBuilder.DropTable(
                 name: "Brands",
@@ -620,7 +622,7 @@ namespace Data.Migrations
                 schema: "mnfc");
 
             migrationBuilder.DropTable(
-                name: "Manufacturers",
+                name: "MoneyUnits",
                 schema: "mnun");
 
             migrationBuilder.DropTable(
@@ -636,8 +638,24 @@ namespace Data.Migrations
                 schema: "prdt");
 
             migrationBuilder.DropTable(
+                name: "Employees",
+                schema: "empl");
+
+            migrationBuilder.DropTable(
                 name: "AccountentTrees",
                 schema: "acnt");
+
+            migrationBuilder.DropTable(
+                name: "Genders",
+                schema: "gndr");
+
+            migrationBuilder.DropTable(
+                name: "JobPositions",
+                schema: "jbps");
+
+            migrationBuilder.DropTable(
+                name: "Nationalities",
+                schema: "brnd");
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Data.Access
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=GIORG;Initial Catalog=WareHouseDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-B3Q553I\SQLEXPRESS;Initial Catalog=WareHouseDB;Integrated Security=True");
         }
     }
 }
